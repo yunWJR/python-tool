@@ -22,7 +22,7 @@ def all_file_of_dir(dir, files):
             files.append(os.path.join(dir, i))
 
 
-def combine_all_file(dir, out_file, suffix):
+def combine_all_file(dir, out_file, suffix, igs):
     '''
     结合所有文件
     :param dir:
@@ -42,4 +42,18 @@ def combine_all_file(dir, out_file, suffix):
         print(n)
         sfp = open(n)
         ls = sfp.readlines()
-        fp.writelines(ls)
+
+        if igs is None or len(igs) == 0:
+            fp.writelines(ls)
+        else:
+            for l in ls:
+                ct = False
+                for ig in igs:
+                    if l.startswith(ig):
+                        ct = True
+                        break
+
+                if ct:
+                    continue
+
+                fp.write(l)

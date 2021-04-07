@@ -5,4 +5,6 @@ if __name__ == "__main__":
 
     save_file = "/Users/yun/Downloads/a1.txt"
 
-    combine_all_file(dir, save_file, '.java')
+    java_ig = ['/**', ' *']
+
+    combine_all_file(dir, save_file, '.java', java_ig)
