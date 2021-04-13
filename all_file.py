@@ -22,7 +22,16 @@ def all_file_of_dir(dir, files):
             files.append(os.path.join(dir, i))
 
 
-def combine_all_file(dir, out_file, suffix, igs):
+def isStartWith(line, igs):
+    nl = line.lstrip()
+    for ig in igs:
+        if nl.startswith(ig):
+            return True
+
+    return False
+
+
+def combine_all_file(dir, out_file, suffixs, igs):
     '''
     结合所有文件
     :param dir:
@@ -35,8 +44,14 @@ def combine_all_file(dir, out_file, suffix, igs):
     all_file_of_dir(dir, files)
 
     for n in files:
-        if suffix is not None:
-            if n.endswith(suffix) is False:
+        if suffixs is not None:
+            fd = False
+            for sf in suffixs:
+                if n.endswith(sf) is True:
+                    fd = True
+                    break
+
+            if fd is False:
                 continue
 
         print(n)
@@ -47,13 +62,7 @@ def combine_all_file(dir, out_file, suffix, igs):
             fp.writelines(ls)
         else:
             for l in ls:
-                ct = False
-                for ig in igs:
-                    if l.startswith(ig):
-                        ct = True
-                        break
-
-                if ct:
+                if isStartWith(l, igs):
                     continue
 
                 fp.write(l)
