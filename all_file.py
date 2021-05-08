@@ -1,5 +1,6 @@
 import os
 
+# 软著代码整合
 
 def all_file_of_dir(dir, files):
     '''

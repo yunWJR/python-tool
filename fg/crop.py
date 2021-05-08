@@ -6,10 +6,10 @@ import cv2
 from file.file_util import image_files_from_folder
 
 if __name__ == "__main__":
-    dir = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/图片1"
+    dir = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/图片3"
 
     output_dir = dir + "/crop_out/"
-    output_dir = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/裁剪版"
+    output_dir = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/裁剪版/"
     if not isdir(output_dir):
         makedirs(output_dir)
 
@@ -20,4 +20,4 @@ if __name__ == "__main__":
 
         img = cv2.imread(img_path)
         cropped = img[189:3321, 236:2245]  # 裁剪坐标为[y0:y1, x0:x1]
-        cv2.imwrite(output_dir + fname + ".jpg", cropped)
+        cv2.imwrite(output_dir + fname + ".jpg", cropped, [int( cv2.IMWRITE_JPEG_QUALITY), 60])
