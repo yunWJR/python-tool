@@ -76,17 +76,17 @@ def ctn_reform(name, ctn_ls):
     n_ls = []
     for i in range(len(ctn_ls)):
         if i == dx_cl_i:
-            n_ls.append("定性、处理处罚依据：\n\n")
+            n_ls.append("\n定性、处理处罚依据：\n\n")
             continue
 
         if i == dx_i:
-            n_ls.append("定性依据：\n\n")
+            n_ls.append("\n定性依据：\n\n")
             continue
         if i == cl_i:
-            n_ls.append("处理、处罚依据：\n\n")
+            n_ls.append("\n处理、处罚依据：\n\n")
             continue
         if i == xg_i:
-            n_ls.append("相关依据：\n\n")
+            n_ls.append("\n相关依据：\n\n")
             continue
         n_ls.append(ctn_ls[i])
     return n_ls
@@ -140,18 +140,20 @@ def create_ctn(p_dic, type):
         z_dir = p_dic + "/" + z_k
         makedirs(z_dir)
 
-        if z_k=="42.项目后续管理措施未落实":
-            print(z_k)
+        # if z_k=="42.项目后续管理措施未落实":
+        #     print(z_k)
 
         dic_list.append(z_dir)
 
-        z_ml_file = z_dir + "/目录.txt"
-        f_ml = open(z_ml_file, "w")
-        f_ml.writelines(z_list[zi][1:])
+        if type < 3:
+            z_ml_file = z_dir + "/目录.txt"
+            f_ml = open(z_ml_file, "w")
+            f_ml.writelines(z_list[zi][1:])
 
-        z_file = z_dir + "/内容.txt"
-        fp = open(z_file, "w")
-        fp.writelines(rst[1:])
+        if type < 3:
+            z_file = z_dir + "/内容.txt"
+            fp = open(z_file, "w")
+            fp.writelines(rst[1:])
 
         if type == 3:
             z_file = z_dir + "/内容格式化.txt"
