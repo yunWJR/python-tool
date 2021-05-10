@@ -20,7 +20,7 @@ def ctnls_of_z(z_key, z_end_key, ctn_lines):
                 e_i = li
 
     if z_end_key is None:
-        e_i = len(ctn_lines) - 1
+        e_i = len(ctn_lines)
 
     if s_i is None:
         print("错误：：开始项： %s 未匹配" % z_key)
@@ -31,6 +31,65 @@ def ctnls_of_z(z_key, z_end_key, ctn_lines):
         return None
 
     return ctn_lines[s_i:e_i]
+
+
+def ctn_reform(name, ctn_ls):
+    dx_cl_i = None
+
+    dx_i = None
+    cl_i = None
+    xg_i = None
+
+    for i in range(len(ctn_ls)):
+        cl = ctn_ls[i]
+
+        if cl.startswith("定性、处理处罚依据"):
+            if dx_cl_i is not None:
+                print("%s 分类检测错误dx_cl_i：\n %s" % (name, ctn_ls))
+                return
+            dx_cl_i = i
+            continue
+
+        if cl.startswith("定性依据"):
+            if dx_i is not None:
+                print("%s 分类检测错误dx_i：\n %s" % (name, ctn_ls))
+                return
+            dx_i = i
+            continue
+        if cl.startswith("处理、处罚依据") or cl.startswith("处理处罚依据"):
+            if cl_i is not None:
+                print("%s 分类检测错误cl_i：\n %s" % (name, ctn_ls))
+                return
+            cl_i = i
+            continue
+
+        if cl.startswith("相关依据"):
+            if xg_i is not None:
+                print("%s 分类检测错误xg_i：\n %s" % (name, ctn_ls))
+                return
+            xg_i = i
+            continue
+
+    if (dx_i is None or cl_i is None) and dx_cl_i is None:
+        print("%s 分类错误：\n %s" % (name, ctn_ls))
+
+    n_ls = []
+    for i in range(len(ctn_ls)):
+        if i == dx_cl_i:
+            n_ls.append("定性、处理处罚依据：\n\n")
+            continue
+
+        if i == dx_i:
+            n_ls.append("定性依据：\n\n")
+            continue
+        if i == cl_i:
+            n_ls.append("处理、处罚依据：\n\n")
+            continue
+        if i == xg_i:
+            n_ls.append("相关依据：\n\n")
+            continue
+        n_ls.append(ctn_ls[i])
+    return n_ls
 
 
 # 目录保存为 md 文件
@@ -81,6 +140,9 @@ def create_ctn(p_dic, type):
         z_dir = p_dic + "/" + z_k
         makedirs(z_dir)
 
+        if z_k=="42.项目后续管理措施未落实":
+            print(z_k)
+
         dic_list.append(z_dir)
 
         z_ml_file = z_dir + "/目录.txt"
@@ -92,9 +154,10 @@ def create_ctn(p_dic, type):
         fp.writelines(rst[1:])
 
         if type == 3:
-            z_file = z_dir + "/内容.md"
+            z_file = z_dir + "/内容格式化.txt"
             fp = open(z_file, "w")
-            fp.writelines(rst[1:])
+            ctn_rf = ctn_reform(z_k, rst[1:])
+            fp.writelines(ctn_rf)
 
     return dic_list
 
