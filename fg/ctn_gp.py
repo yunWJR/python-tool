@@ -76,19 +76,21 @@ def ctn_reform(name, ctn_ls):
     n_ls = []
     for i in range(len(ctn_ls)):
         if i == dx_cl_i:
-            n_ls.append("\n定性、处理处罚依据：\n\n")
+            n_ls.append("\n## 定性、处理处罚依据：\n\n")
             continue
 
         if i == dx_i:
-            n_ls.append("\n定性依据：\n\n")
+            n_ls.append("\n## 定性依据：\n\n")
             continue
         if i == cl_i:
-            n_ls.append("\n处理、处罚依据：\n\n")
+            n_ls.append("\n## 处理、处罚依据：\n\n")
             continue
         if i == xg_i:
-            n_ls.append("\n相关依据：\n\n")
+            n_ls.append("\n## 相关依据：\n\n")
             continue
         n_ls.append(ctn_ls[i])
+        n_ls.append("\n")
+
     return n_ls
 
 
@@ -156,7 +158,7 @@ def create_ctn(p_dic, type):
             fp.writelines(rst[1:])
 
         if type == 3:
-            z_file = z_dir + "/内容格式化.txt"
+            z_file = z_dir + "/内容格式化.md"
             fp = open(z_file, "w")
             ctn_rf = ctn_reform(z_k, rst[1:])
             fp.writelines(ctn_rf)
