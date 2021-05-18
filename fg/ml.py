@@ -85,6 +85,6 @@ if __name__ == "__main__":
     # ml_file_out = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/格式化/目录_out.txt"
     # check_ml(ml_file, ml_file_out)
 
-    ml_file_out = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/格式化/目录_out.txt"
-    ml_file_out_md = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/格式化/目录_out.md"
+    ml_file_out = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/违反财经法规行为审计定性和处理处罚向导（修订版）上册/ml-fix"
+    ml_file_out_md = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/违反财经法规行为审计定性和处理处罚向导（修订版）上册/ml-fix_out.md"
     create_ml_md(ml_file_out, ml_file_out_md)

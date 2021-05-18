@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
-from os import makedirs
+import shutil
+from os import makedirs, listdir
+from os.path import isdir, join
 
 from fg.rg import rg_zj, rg_sec3, rg_sec1, rg_sec2
 
@@ -167,7 +169,15 @@ def create_ctn(p_dic, type):
 
 
 if __name__ == "__main__":
-    p_dic = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/格式化/ctn"
+    p_dic = "/Volumes/mac_data/2-pj/28-xztool/审计/法规/违反财经法规行为审计定性和处理处罚向导（修订版）上册/格式化"
+
+    # 删除已有目录
+    ds = listdir(p_dic)
+    for d in ds:
+        path = join(p_dic, d)
+        if isdir(path):
+            shutil.rmtree(path, True)
+
     rst_dir = create_ctn(p_dic, 0)
 
     for d1 in rst_dir:

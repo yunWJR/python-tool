@@ -2,7 +2,6 @@ import re
 
 dx = '[一二三四五六七八九十]+'
 
-
 # 第一章
 def rg_zj(str):
     pt = '第{}章'.format(dx)
