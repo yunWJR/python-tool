@@ -7,10 +7,6 @@ def rg_zj(str):
     pt = '第{}章'.format(dx)
     return re.match(pt, str)
 
-# 第一条
-def rg_tiao(str):
-    pt = '第{}条'.format(dx)
-    return re.match(pt, str)
 
 # 一、
 def rg_sec1(str):
