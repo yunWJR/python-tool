@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+import json
+
 from fg.rg import rg_zj, rg_tiao
 
 
@@ -58,6 +60,8 @@ def create_ctn(org_file, json_file):
         items.append(item)
 
     print(items)
+    with open(json_file, 'w', encoding='utf-8') as file_obj:
+        json.dump(items, file_obj, ensure_ascii=False)
 
 
 if __name__ == "__main__":
