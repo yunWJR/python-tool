@@ -7,6 +7,9 @@ from fg.rg import rg_zj, rg_tiao
 
 
 # 目录保存为 md 文件
+from fg2.fix_ctn import fix_ctn_file
+
+
 def create_ctn(org_file, json_file):
     cp = None
 
@@ -65,4 +68,6 @@ def create_ctn(org_file, json_file):
 
 
 if __name__ == "__main__":
-    create_ctn("/Users/yun/Downloads/会计法-fix.txt", "/Users/yun/Downloads/会计法-json.txt")
+    fix_ctn_file("/Users/yun/Downloads/1",
+                 "/Users/yun/Downloads/1.txt")
+    create_ctn("/Users/yun/Downloads/1.txt", "/Users/yun/Downloads/1-json.txt")
