@@ -67,4 +67,4 @@ def create_ctn(org_dir, json_file):
 
 
 if __name__ == "__main__":
-    create_ctn("/Volumes/mac_data/2-pj/28-xztool/审计/法规/违反财经法规行为审计定性和处理处罚向导（修订版）下册/核对内容", "/Users/yun/Downloads/1-json.txt")
+    create_ctn("/Users/yun/Downloads/违反财经法规行为审计定性和处理处罚向导（修订版）上册-核对", "/Users/yun/Downloads/1-json.txt")
