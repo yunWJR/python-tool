@@ -29,6 +29,11 @@ def rg_sec3(str):
     pt = '[1-9][0-9]*\.'
     return re.match(pt, str)
 
+# 1、
+def rg_sec3_1(str):
+    pt = '[1-9][0-9]*、'
+    return re.match(pt, str)
+
 
 #   123123  -末尾页码数字
 def rg_end1(str):
