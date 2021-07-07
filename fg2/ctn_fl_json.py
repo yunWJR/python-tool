@@ -25,7 +25,7 @@ def create_ctn(org_file, json_file):
         if l.endswith("\n"):
             l = l[:len(l) - 1]
 
-        if rg_sec1(l) is not None:
+        if rg_zj(l) is not None:
             print("章节：%s" % l)
             cp = l
             continue

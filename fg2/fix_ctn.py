@@ -47,6 +47,9 @@ def fix_ctn_file(file: str, out_file: str):
         l = fix_ml_no(l)
         l = fix_word(l)
 
+        if l == '\n':
+            continue
+
         fp.write(l)
 
     fo.close()
