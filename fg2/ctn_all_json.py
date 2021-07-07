@@ -3,7 +3,7 @@
 
 import json
 
-from fg.rg import rg_sec1, rg_sec2, rg_zj, rg_tiao
+from fg.rg import rg_sec1, rg_sec2, rg_zj, rg_tiao, rg_sec3_1
 # 目录保存为 md 文件
 from fg2.fix_ctn import fix_ctn_file
 
@@ -16,6 +16,7 @@ def reform_base(l):
 
 
 def create_ctn(org_file, json_file, type):
+    no_cp = True
     cp = None
     cp_items = []
     cp_list = []
@@ -52,6 +53,8 @@ def create_ctn(org_file, json_file, type):
         else:
             # 一、
             rg_s1 = rg_sec1(l)
+            # 第一条
+            # rg_s1 = rg_tiao(l)
         if rg_s1 is not None:
             if cp is not None:
                 cpMap = {"cp": cp, "cp_items": cp_items}
@@ -65,11 +68,14 @@ def create_ctn(org_file, json_file, type):
 
             continue
 
-        if cp is not None:
+        if cp is not None or no_cp:
             cp_items.append(l)
 
     if cp is not None:
         cpMap = {"cp": cp, "cp_items": cp_items}
+        cp_list.append(cpMap)
+    else:
+        cpMap = {"cp": '', "cp_items": cp_items}
         cp_list.append(cpMap)
 
     # 二次分组
@@ -87,7 +93,11 @@ def create_ctn(org_file, json_file, type):
                 rg_s1 = rg_tiao(cp_item)
             else:
                 # （一）
-                rg_s1 = rg_sec2(cp_item)
+                # rg_s1 = rg_sec2(cp_item)
+                # 1、
+                # rg_s1 = rg_sec3_1(cp_item)
+                # 第一条
+                rg_s1 = rg_tiao(cp_item)
             if rg_s1 is not None:
                 if sec is not None:
                     item = {"title": sec, "content": cur_ctn, "chapterName": cp}
@@ -162,7 +172,7 @@ def create_ctn_s1(org_file, json_file):
 
 if __name__ == "__main__":
     # 1-法规；3-意见
-    type = 1
+    type = 3
 
     fix_ctn_file("/Users/yun/Downloads/意见",
                  "/Users/yun/Downloads/意见.txt")
