@@ -3,9 +3,7 @@
 
 import json
 
-from fg.rg import rg_zj, rg_tiao
-
-
+from fg.rg import rg_sec1, rg_sec2
 # 目录保存为 md 文件
 from fg2.fix_ctn import fix_ctn_file
 
@@ -25,12 +23,14 @@ def create_ctn(org_file, json_file):
         if l.endswith("\n"):
             l = l[:len(l) - 1]
 
-        if rg_zj(l) is not None:
-            print("目录章节：%s" % l)
+        # 一、
+        if rg_sec1(l) is not None:
+            print("章节：%s" % l)
             cp = l
             continue
 
-        if rg_tiao(l) is not None:
+        # （一）
+        if rg_sec2(l) is not None:
             if curItemTitle is not None:
 
                 item = {"title": curItemTitle, "content": curItem}
@@ -39,7 +39,7 @@ def create_ctn(org_file, json_file):
                     item["chapterName"] = cp
                 items.append(item)
 
-            rg_t = rg_tiao(l).group()
+            rg_t = rg_sec2(l).group()
 
             curItemTitle = rg_t
             curItem = l[len(rg_t):]
@@ -68,6 +68,6 @@ def create_ctn(org_file, json_file):
 
 
 if __name__ == "__main__":
-    fix_ctn_file("/Users/yun/Downloads/1",
-                 "/Users/yun/Downloads/1.txt")
-    create_ctn("/Users/yun/Downloads/1.txt", "/Users/yun/Downloads/1-json.txt")
+    fix_ctn_file("/Users/yun/Downloads/意见",
+                 "/Users/yun/Downloads/意见.txt")
+    create_ctn("/Users/yun/Downloads/意见.txt", "/Users/yun/Downloads/意见-json.txt")
