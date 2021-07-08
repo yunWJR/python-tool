@@ -3,7 +3,7 @@
 
 import json
 
-from fg.rg import rg_sec1, rg_sec2, rg_zj, rg_tiao, rg_sec3_1
+from fg.rg import rg_sec1, rg_sec2, rg_zj, rg_tiao, rg_sec3_1, rg_sec3
 # 目录保存为 md 文件
 from fg2.fix_ctn import fix_ctn_file
 
@@ -16,7 +16,7 @@ def reform_base(l):
 
 
 def create_ctn(org_file, json_file, type):
-    no_cp = True
+    no_cp = False
     cp = None
     cp_items = []
     cp_list = []
@@ -55,6 +55,8 @@ def create_ctn(org_file, json_file, type):
             rg_s1 = rg_sec1(l)
             # 第一条
             # rg_s1 = rg_tiao(l)
+            # 第一章
+            # rg_s1 = rg_zj(l)
         if rg_s1 is not None:
             if cp is not None:
                 cpMap = {"cp": cp, "cp_items": cp_items}
@@ -93,11 +95,16 @@ def create_ctn(org_file, json_file, type):
                 rg_s1 = rg_tiao(cp_item)
             else:
                 # （一）
-                # rg_s1 = rg_sec2(cp_item)
+                rg_s1 = rg_sec2(cp_item)
                 # 1、
                 # rg_s1 = rg_sec3_1(cp_item)
+                # 11.
+                # rg_s1 = rg_sec3(cp_item)
                 # 第一条
-                rg_s1 = rg_tiao(cp_item)
+                # rg_s1 = rg_tiao(cp_item)
+                # 一、
+                # rg_s1 = rg_sec1(cp_item)
+
             if rg_s1 is not None:
                 if sec is not None:
                     item = {"title": sec, "content": cur_ctn, "chapterName": cp}
