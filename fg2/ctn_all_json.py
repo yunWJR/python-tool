@@ -16,7 +16,12 @@ def reform_base(l):
 
 
 def create_ctn(org_file, json_file, type):
+    # 是否无章节
     no_cp = False
+    # sec 是否有标题
+    sec_title = False
+
+    # 数据
     cp = None
     cp_items = []
     cp_list = []
@@ -56,7 +61,7 @@ def create_ctn(org_file, json_file, type):
             # 第一条
             # rg_s1 = rg_tiao(l)
             # 第一章
-            # rg_s1 = rg_zj(l)
+            rg_s1 = rg_zj(l)
         if rg_s1 is not None:
             if cp is not None:
                 cpMap = {"cp": cp, "cp_items": cp_items}
@@ -101,7 +106,7 @@ def create_ctn(org_file, json_file, type):
                 # 11.
                 # rg_s1 = rg_sec3(cp_item)
                 # 第一条
-                # rg_s1 = rg_tiao(cp_item)
+                rg_s1 = rg_tiao(cp_item)
                 # 一、
                 # rg_s1 = rg_sec1(cp_item)
 
@@ -109,11 +114,14 @@ def create_ctn(org_file, json_file, type):
                 if sec is not None:
                     item = {"title": sec, "content": cur_ctn, "chapterName": cp}
                     items.append(item)
+                    cur_ctn  = None
 
-                rg_t = rg_s1.group()
-
-                sec = rg_t
-                cur_ctn = cp_item[len(rg_t):]
+                if sec_title:
+                    sec = cp_item
+                else:
+                    rg_t = rg_s1.group()
+                    sec = rg_t
+                    cur_ctn = cp_item[len(rg_t):]
                 continue
 
             if cur_ctn is None:
@@ -179,7 +187,7 @@ def create_ctn_s1(org_file, json_file):
 
 if __name__ == "__main__":
     # 1-法规；3-意见
-    type = 3
+    type =3
 
     fix_ctn_file("/Users/yun/Downloads/意见",
                  "/Users/yun/Downloads/意见.txt")
