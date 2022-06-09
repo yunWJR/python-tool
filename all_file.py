@@ -1,5 +1,6 @@
 import os
 
+
 # 软著代码整合
 
 def all_file_of_dir(dir, files):
@@ -56,6 +57,11 @@ def combine_all_file(dir, out_file, suffixs, igs):
                 continue
 
         print(n)
+
+        if n.lower().find("test") >= 0:
+            print("skit test")
+            continue
+
         sfp = open(n)
         ls = sfp.readlines()
 
